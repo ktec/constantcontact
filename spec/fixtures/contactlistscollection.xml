@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/recordkick/lists</id>
+  <title type="text">Contact Lists for Customer: recordkick</title>
+  <link href="http://api.constantcontact.com/ws/customers/recordkick/lists" />
+  <link href="http://api.constantcontact.com/ws/customers/recordkick/lists" rel="self" />
+  <author>
+    <name>recordkick</name>
+  </author>
+  <updated>2009-07-07T23:30:17.373Z</updated>
+  <link href="/ws/customers/recordkick/lists" rel="first" />
+  <link href="/ws/customers/recordkick/lists" rel="current" />
+  <entry>
+    <link href="/ws/customers/recordkick/lists/active" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/recordkick/lists/active</id>
+    <title type="text">Active</title>
+    <updated>2009-07-07T23:30:17.388Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/recordkick/lists/active">
+        <Name>Active</Name>
+        <ShortName>Active</ShortName>
+      </ContactList>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/recordkick/lists/do-not-mail" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/recordkick/lists/do-not-mail</id>
+    <title type="text">Do Not Mail</title>
+    <updated>2009-07-07T23:30:17.388Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/recordkick/lists/do-not-mail">
+        <Name>Do Not Mail</Name>
+        <ShortName>Do Not Mail</ShortName>
+      </ContactList>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/recordkick/lists/removed" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/recordkick/lists/removed</id>
+    <title type="text">Removed</title>
+    <updated>2009-07-07T23:30:17.388Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/recordkick/lists/removed">
+        <Name>Removed</Name>
+        <ShortName>Removed</ShortName>
+      </ContactList>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/recordkick/lists/1" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/recordkick/lists/1</id>
+    <title type="text">General Interest</title>
+    <updated>2009-07-07T23:30:17.389Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/recordkick/lists/1">
+        <OptInDefault>true</OptInDefault>
+        <Name>General Interest</Name>
+        <ShortName>General Interest</ShortName>
+        <DisplayOnSignup>Yes</DisplayOnSignup>
+        <SortOrder>1</SortOrder>
+        <Members id="http://api.constantcontact.com/ws/customers/recordkick/lists/1/members"></Members>
+      </ContactList>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/recordkick/lists/2" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/recordkick/lists/2</id>
+    <title type="text">Clients</title>
+    <updated>2009-07-07T23:30:17.389Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/recordkick/lists/2">
+        <OptInDefault>false</OptInDefault>
+        <Name>Clients</Name>
+        <ShortName>Clients</ShortName>
+        <DisplayOnSignup>No</DisplayOnSignup>
+        <SortOrder>2</SortOrder>
+        <Members id="http://api.constantcontact.com/ws/customers/recordkick/lists/2/members"></Members>
+      </ContactList>
+    </content>
+  </entry>
+</feed>

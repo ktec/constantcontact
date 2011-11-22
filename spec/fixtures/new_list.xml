@@ -1,0 +1,16 @@
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/lists/15</id>
+  <title type="text">A New List</title>
+  <author />
+  <updated>2008-04-16T15:28:09.757Z</updated>
+  <content type="application/vnd.ctct+xml">
+    <ContactList xmlns="http://ws.constantcontact.com/ns/1.0/" 
+        id="http://api.constantcontact.com/ws/customers/joesflowers/lists/15">
+      <OptInDefault>false</OptInDefault>
+      <Name>Test list 5</Name>
+      <SortOrder>1</SortOrder>
+      <ShortName>Test list 5</ShortName>
+    </ContactList>
+  </content>
+  <link href="/ws/customers/joesflowers/lists/15" rel="edit" />
+</entry>

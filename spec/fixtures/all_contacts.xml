@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts</id>
+  <title type="text">Contacts for Customer: joesflowers</title>
+  <link href="contacts" />
+  <link href="contacts" rel="self" />
+  <author>
+    <name>joesflowers</name>
+  </author>
+  <updated>2010-04-22T00:09:05.992Z</updated>
+  <link href="/ws/customers/joesflowers/contacts" rel="first" />
+  <link href="/ws/customers/joesflowers/contacts" rel="current" />
+  <entry>
+    <link href="/ws/customers/joesflowers/contacts/2" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/2</id>
+    <title type="text">Contact: jon@example.com</title>
+    <updated>2010-04-22T00:09:06.017Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <Contact xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/2">
+        <Status>Active</Status>
+        <EmailAddress>jon@example.com</EmailAddress>
+        <EmailType>HTML</EmailType>
+        <Name>smith, jon</Name>
+        <OptInTime>2010-04-21T18:35:34.066Z</OptInTime>
+        <OptInSource>ACTION_BY_CUSTOMER</OptInSource>
+      </Contact>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/joesflowers/contacts/1" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/1</id>
+    <title type="text">Contact: webdeveloper@fullsteam.com</title>
+    <updated>2010-04-22T00:09:06.017Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <Contact xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/1">
+        <Status>Active</Status>
+        <EmailAddress>my@example.com</EmailAddress>
+        <EmailType>HTML</EmailType>
+        <Name>Doe, Marvin</Name>
+        <OptInTime>2010-04-14T22:09:42.950Z</OptInTime>
+        <OptInSource>ACTION_BY_CUSTOMER</OptInSource>
+      </Contact>
+    </content>
+  </entry>
+</feed>

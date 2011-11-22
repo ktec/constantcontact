@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title type="text">Constant Contact Web Services Customer Workspace</atom:title>
+    <collection href="/ws/customers/joesflowers/lists">
+      <atom:title type="text">Contact Lists</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+    <collection href="/ws/customers/joesflowers/activities">
+      <atom:title type="text">Bulk Activity</atom:title>
+      <accept>application/x-www-form-urlencoded</accept>
+      <accept>multipart/form-data</accept>
+    </collection>
+  </workspace>
+</service>
