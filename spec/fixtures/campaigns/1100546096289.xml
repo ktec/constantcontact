@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <link href="/ws/customers/joesflowers/campaigns" rel="edit" />
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/campaigns</id>
+  <title type="text">API Test Email</title>
+  <updated>2009-10-19T18:34:53.105Z</updated>
+  <author>
+    <name>Constant Contact</name>
+  </author>
+  <content type="application/vnd.ctct+xml">
+    <Campaign xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100546096289">
+      <Name>API Test Email</Name>
+      <Status>Draft</Status>
+      <Date>2009-10-19T18:34:53.105Z</Date>
+      <Subject>Enter email subject here</Subject>
+      <FromName>joesflowers@example.com</FromName>
+      <ViewAsWebpage>NO</ViewAsWebpage>
+      <ViewAsWebpageLinkText></ViewAsWebpageLinkText>
+      <ViewAsWebpageText></ViewAsWebpageText>
+      <PermissionReminder>YES</PermissionReminder>
+      <PermissionReminderText>You're receiving this email because of your relationship with ctct. 
+Please <ConfirmOptin><a style="color:#0000ff;">confirm</a></ConfirmOptin> 
+your continued interest in receiving email from us.</PermissionReminderText>
+      <GreetingSalutation>Dear</GreetingSalutation>
+      <GreetingName>FirstName</GreetingName>
+      <GreetingString>Greetings!</GreetingString>
+      <OrganizationName>ctct</OrganizationName>
+      <OrganizationAddress1>123 wsw st</OrganizationAddress1>
+      <OrganizationAddress2></OrganizationAddress2>
+      <OrganizationAddress3></OrganizationAddress3>
+      <OrganizationCity>Ashland</OrganizationCity>
+      <OrganizationState>MA</OrganizationState>
+      <OrganizationInternationalState></OrganizationInternationalState>
+      <OrganizationCountry>us</OrganizationCountry>
+      <OrganizationPostalCode>32423</OrganizationPostalCode>
+      <IncludeForwardEmail>NO</IncludeForwardEmail>
+      <ForwardEmailLinkText></ForwardEmailLinkText>
+      <IncludeSubscribeLink>NO</IncludeSubscribeLink>
+      <SubscribeLinkText></SubscribeLinkText>
+      <EmailContentFormat>HTML</EmailContentFormat>
+      <EmailContent><html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:cctd="http://www.constantcontact.com/cctd">
+<body><CopyRight>Copyright (c) 1996-2009 Constant Contact. All rights reserved.  Except as permitted under a
+separate
+written agreement with Constant Contact, neither the Constant Contact software, nor any content that appears on any
+Constant Contact site,
+including but not limited to, web pages, newsletters, or templates may be reproduced, republished, repurposed, or
+distributed without the
+prior written permission of Constant Contact.  For inquiries regarding reproduction or distribution of any Constant
+Contact material, please
+contact joesflowers@example.com.</CopyRight>
+<OpenTracking/>
+<!--  Do NOT delete previous line if you want to get statistics on the number of opened emails -->
+<CustomBlock name="letter.intro" title="Personalization">
+    <Greeting/>
+</CustomBlock>
+</body>
+</html></EmailContent>
+      <EmailTextContent><Text>This is the text version.</Text></EmailTextContent>
+      <StyleSheet></StyleSheet>
+      <ContactLists>
+        <ContactList id="http://api.constantcontact.com/ws/customers/joesflowers/lists/1">
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/lists/1" rel="self" />
+        </ContactList>
+      </ContactLists>
+      <FromEmail>
+        <Email id="http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses/1">
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/settings/emailaddresses/1" rel="self" />
+        </Email>
+        <EmailAddress>joesflowers@example.com</EmailAddress>
+      </FromEmail>
+      <ReplyToEmail>
+        <Email id="http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses/1">
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/settings/emailaddresses/1" rel="self" />
+        </Email>
+        <EmailAddress>joesflowers@example.com</EmailAddress>
+      </ReplyToEmail>
+    </Campaign>
+  </content>
+  <source>
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/campaigns</id>
+    <title type="text">Campaigns for customer: joesflowers</title>
+    <link href="campaigns" />
+    <link href="campaigns" rel="self" />
+    <author>
+      <name>joesflowers</name>
+    </author>
+    <updated>2009-10-19T19:36:12.622Z</updated>
+  </source>
+</entry>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses</id>
+  <title type="text" />
+  <link href="http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses" />
+  <link href="http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses" rel="self" />
+  <author>
+    <name>joesflowers</name>
+  </author>
+  <updated>2009-10-01T20:18:22.775Z</updated>
+  <entry>
+    <link href="/ws/customers/joesflowers/settings/emailaddresses/1" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses/1</id>
+    <title type="text">joesflowers@example.com</title>
+    <updated>2009-05-21T17:44:04.609Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <Email xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.
+      com/ws/customers/joesflowers/settings/emailaddresses/1">
+        <EmailAddress>joesflowers@example.com</EmailAddress>
+        <Status>Verified</Status>
+        <VerifiedTime>2009-05-21T17:44:04.609Z</VerifiedTime>
+      </Email>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/joesflowers/settings/emailaddresses/2" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/settings/emailaddresses/2</id>
+    <title type="text">joesflowers2@example.com</title>
+    <updated>2009-09-02T13:27:36.552Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <Email xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.
+      com/ws/customers/joesflowers/settings/emailaddresses/2">
+        <EmailAddress>joesflowers2@example.com</EmailAddress>
+        <Status>Pending</Status>
+      </Email>
+    </content>
+  </entry>
+</feed>

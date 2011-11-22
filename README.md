@@ -43,14 +43,23 @@ Comments are welcome. Send your feedback through the [issue tracker on GitHub][i
 If you have fixes: Submit via pull requests. Do not include version changes to the 
 version file. 
 
+This is inspired by and closely based on original work by Timothy Case, https://github.com/timcase/constant_contact and contributions.
+
 ## Authors
 
 * [Keith Salisbury][ktec]
 
 ## Contributors
 
+* [Tim Case][timcase]
+* [Laurence A. Lee][rubyjedi]
+* [Ed Hickey][bassnode]
 
 
+[ktec]: https://github.com/ktec
+[timcase]: https://github.com/timcase
+[rubyjedi]: https://github.com/rubyjedi
+[basenode]: https://github.com/bassnode
 
 [api]: http://developer.37signals.com/highrise
 [ar]: http://api.rubyonrails.org/classes/ActiveResource/Base.html

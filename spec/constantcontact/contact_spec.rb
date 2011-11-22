@@ -1,45 +1,49 @@
 require 'spec_helper'
 
-describe ConstantContact::Contact do
-  it { should be_a_kind_of ConstantContact::Base }
-  it_should_behave_like "a pageable class"
+describe Contact do
+  it { should be_a_kind_of Base }
   it_should_behave_like "a searchable class"
-
 
   describe do
 
-    before {
-      ConstantContact::Base.api_key = 'api_key'
-      ConstantContact::Base.user = 'joesflowers'
-      ConstantContact::Base.password = 'password'
-    }
-    subject { ConstantContact::Contact.new(:id => 1, :name => "First Contact") }
+    before { set_default_credentials }
+
+    subject { Contact.new(:id => 1, :name => "First Contact") }
+
+    it { should respond_to :encode }
+
+    #context "encode should call to_xml" do
+    #  before { subject.encode }
+    #  it { should_receive(:to_atom) }
+    #end
 
     it ".find_by_name" do
-      contact = ConstantContact::Contact.new(:id => 2, :name => "Another Contact")
-      ConstantContact::Contact.should_receive(:find).with(:all).and_return([contact, subject])
-      ConstantContact::Contact.find_by_name("First Contact").should == subject
+      contact = Contact.new(:id => 2, :name => "Another Contact")
+      Contact.should_receive(:find).with(:all).and_return([contact, subject])
+      Contact.find_by_name("First Contact").should == subject
     end
 
     describe ".new" do
 
       context "without parameters" do
-        subject { ConstantContact::Contact.new( :name => "First Contact" ) }
-        it { ConstantContact::Base.user == "joesflowers" }
-        it { subject.opt_in_source.should == "ACTION_BY_CUSTOMER" }
-        it { subject.contact_lists.should == nil } # Shouldn't this be should_not be nil?
-        it { subject.to_atom.should match /<ContactList id="/ }
-        it { subject.to_atom.should match /https:\/\/api.constantcontact.com\/ws\/customers\/joesflowers\/lists\/1/ }
+        subject { Contact.new }
+        it { Base.user.should == "joesflowers" }
+        its(:opt_in_source) { should == "ACTION_BY_CUSTOMER" }
+        its(:contact_lists) { should have(1).item } # Shouldn't this be should_not be nil?
+        its(:to_atom) { should match /<ContactList id="/ }
+        its(:to_atom) { should match /http:\/\/api.constantcontact.com\/ws\/customers\/joesflowers\/lists\/1/ }
       end
 
       context "with parameters" do
-        subject { ConstantContact::Contact.new(:name => "First Contact", :list_ids => [7,8]) }
-        it { subject.contact_lists.should == [7,8] }
+        subject { Contact.new(:name => "First Contact", :list_ids => [7,8]) }
+        its(:name) { should == "First Contact" }
+        its(:opt_in_source) { should == "ACTION_BY_CUSTOMER" }
+        its(:contact_lists) { should have(2).items }
       end
 
-      context "with attributes from server" do
+      context "with attributes hash" do
         subject {
-          ConstantContact::Contact.new(
+          Contact.new(
             {
               "id"=>"http://api.constantcontact.com/ws/customers/joesflowers/contacts/2", 
               "xmlns"=>"http://ws.constantcontact.com/ns/1.0/", 
@@ -48,23 +52,7 @@ describe ConstantContact::Contact do
               "EmailType"=>"HTML", 
               "Name"=>"jon smith", 
               "FirstName"=>"jon", 
-              "MiddleName"=>nil, 
               "LastName"=>"smith", 
-              "JobTitle"=>nil, 
-              "CompanyName"=>nil, 
-              "HomePhone"=>nil, 
-              "WorkPhone"=>nil, 
-              "Addr1"=>nil,
-              "Addr2"=>nil,
-              "Addr3"=>nil,
-              "City"=>nil,
-              "StateCode"=>nil,
-              "StateName"=>nil,
-              "CountryCode"=>nil,
-              "CountryName"=>nil,
-              "PostalCode"=>nil,
-              "SubPostalCode"=>nil,
-              "Note"=>nil,
               "ContactLists"=>{
                 "ContactList"=>{
                   "id"=>"http://api.constantcontact.com/ws/customers/joesflowers/lists/1",
@@ -82,88 +70,189 @@ describe ConstantContact::Contact do
             }
           )
         }
-        it { subject.Name.should == "jon smith" }
-        it { subject.EmailAddress.should == "jon@example.com" }
-        it { subject.contact_lists.should == [1] }
-        it { subject.Status.should == "Active" }
+        it { should be_valid }
+        its(:Name) { should == "jon smith" }
+        its(:EmailAddress) { should == "jon@example.com" }
+        its(:contact_lists) { should have(1).item }
+        its(:Status) { should == "Active" }
       end
 
-      context "with parameters as array" do
-        subject { ConstantContact::Contact.new([{"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/contacts/2", "xmlns"=>"http://ws.constantcontact.com/ns/1.0/", "Status"=>"Active", "EmailAddress"=>"jon@example.com", "EmailType"=>"HTML", "Name"=>"jon smith", "FirstName"=>"jon", "MiddleName"=>nil, "LastName"=>"smith", "JobTitle"=>nil, "CompanyName"=>nil, "HomePhone"=>nil, "WorkPhone"=>nil, "Addr1"=>nil, "Addr2"=>nil, "Addr3"=>nil, "City"=>nil, "StateCode"=>nil, "StateName"=>nil, "CountryCode"=>nil, "CountryName"=>nil, "PostalCode"=>nil, "SubPostalCode"=>nil, "Note"=>nil, "CustomField1"=>nil, "CustomField2"=>nil, "CustomField3"=>nil, "CustomField4"=>nil, "CustomField5"=>nil, "CustomField6"=>nil, "CustomField7"=>nil, "CustomField8"=>nil, "CustomField9"=>nil, "CustomField10"=>nil, "CustomField11"=>nil, "CustomField12"=>nil, "CustomField13"=>nil, "CustomField14"=>nil, "CustomField15"=>nil, "ContactLists"=>{"ContactList"=>{"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/lists/1", "link"=>{"href"=>"/ws/customers/joesflowers/lists/1", "rel"=>"self", "xmlns"=>"http://www.w3.org/2005/Atom"}, "OptInSource"=>"ACTION_BY_CUSTOMER", "OptInTime"=>"2010-04-21T18:35:34.175Z"}}, "Confirmed"=>"false", "InsertTime"=>"2010-04-21T18:35:34.066Z", "LastUpdateTime"=>"2010-04-21T18:35:34.279Z"}]) }
+      context "with attributes array" do
+        subject { Contact.new([{"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/contacts/2", "xmlns"=>"http://ws.constantcontact.com/ns/1.0/", "Status"=>"Active", "EmailAddress"=>"jon@example.com", "EmailType"=>"HTML", "Name"=>"jon smith", "FirstName"=>"jon", "MiddleName"=>nil, "LastName"=>"smith", "JobTitle"=>nil, "CompanyName"=>nil, "HomePhone"=>nil, "WorkPhone"=>nil, "Addr1"=>nil, "Addr2"=>nil, "Addr3"=>nil, "City"=>nil, "StateCode"=>nil, "StateName"=>nil, "CountryCode"=>nil, "CountryName"=>nil, "PostalCode"=>nil, "SubPostalCode"=>nil, "Note"=>nil, "CustomField1"=>nil, "CustomField2"=>nil, "CustomField3"=>nil, "CustomField4"=>nil, "CustomField5"=>nil, "CustomField6"=>nil, "CustomField7"=>nil, "CustomField8"=>nil, "CustomField9"=>nil, "CustomField10"=>nil, "CustomField11"=>nil, "CustomField12"=>nil, "CustomField13"=>nil, "CustomField14"=>nil, "CustomField15"=>nil, "ContactLists"=>{"ContactList"=>{"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/lists/1", "link"=>{"href"=>"/ws/customers/joesflowers/lists/1", "rel"=>"self", "xmlns"=>"http://www.w3.org/2005/Atom"}, "OptInSource"=>"ACTION_BY_CUSTOMER", "OptInTime"=>"2010-04-21T18:35:34.175Z"}}, "Confirmed"=>"false", "InsertTime"=>"2010-04-21T18:35:34.066Z", "LastUpdateTime"=>"2010-04-21T18:35:34.279Z"}]) }
+        it { should be_valid }
+        its(:Name) { should == "jon smith" }
+        its(:EmailAddress) { should == "jon@example.com" }
+        its(:contact_lists) { should have(1).item }
+        its(:Status) { should == "Active" }
       end
-
-      # Person.find(:all, :params => { :title => "CEO" })
-      # # => GET /people.json?title=CEO
-      context "find all active contacts" do
-        stub_get('/contacts?Status=Active','multiple_contacts_by_emails.xml')
-        subject { ConstantContact::Contact.find(:all, :params => {:Status => 'Active'}) }
-        it { subject.count.should == 2 }
-        it { subject[0].id.should == "http://api.constantcontact.com/ws/customers/joesflowers/contacts/2" }
-      end
-
     end
 
     # encoding
     describe ".to_atom" do
 
-      subject { ConstantContact::Contact.new(:email_address => "test_100@example.com") }
-      
-      it { subject.to_atom.should match /http:\/\/www.w3.org\/2005\/Atom/ }
-      it { subject.to_atom.should match /<Contact xmlns=\"http:\/\/ws.constantcontact.com\/ns\/1.0\/\"/ }
-      it { subject.to_atom.should match /\<\/Contact\>/ }
-      it { subject.to_atom.should match /\<\/ContactLists\>/ }
-
-      context "with multiple lists subscriptions" do
-        before { subject.contact_lists = [1,2] }
-        it { subject.to_atom.scan(/<ContactList /).length.should == 2 }
-        it { subject.to_atom.should match /<ContactList id="#{Regexp.escape(subject.list_url(1))}"/ }
-        it { subject.to_atom.should match /<ContactList id="#{Regexp.escape(subject.list_url(2))}"/ }
+      before do
+        stub_get('/lists/1', 'lists/1.xml')
+        stub_get('/lists/2', 'lists/2.xml')
       end
 
+      subject { Contact.new(:email_address => "test_100@example.com" ) }
+      
+      its(:to_atom) { should match /Atom/ }
+      its(:to_atom) { should match /ws.constantcontact.com/ }
+      its(:to_atom) { should match /\<\/Contact\>/ }
+      its(:to_atom) { should match /\<\/ContactLists\>/ }
+
+      context "with multiple lists subscriptions" do
+        before { subject.contact_lists = [ContactList.find(1),ContactList.find(2)] }
+        specify { subject.to_atom.scan(/<ContactList /).length.should == 2 }
+        # TODO -need to test the output more thoroughly
+        specify { subject.to_atom.should match /<ContactList id=/ }
+        specify { subject.to_atom.should match /<ContactList id=/ }
+      end
     end
 
     describe ".search" do
       before {
-        stub_get('/contacts', 'all_contacts.xml')
-        stub_get('/contacts?email=jon%40example.com&n=0', 'single_contact_by_email.xml')
-        stub_get('/contacts?email=jon%40example.com&n=1', 'nocontent.xml')
-        stub_get('/contacts?email=jon%40example.com&email=my%40example.com&n=0', 'multiple_contacts_by_emails.xml')
-        stub_get('/contacts?email=jon%40example.com&email=my%40example.com&n=1', 'nocontent.xml')
-        stub_get('/contacts?email=jon%40example.com&email=my%40example.com&n=2', 'nocontent.xml')
+        stub_get('/contacts?email=jon%40example.com', 'contacts/search1.xml')
+        stub_get('/contacts?email=jon%40example.com&email=my%40example.com', 'contacts/search2.xml')
       }
 
-      context "for one email address" do
-        subject { ConstantContact::Contact.search(:email => "jon@example.com") }
-        it { subject.count.should == 1 }
+      context "with one email address" do
+        subject { Contact.search(:email => "jon@example.com") }
+        it { should have(1).item }
         it { subject[0].Name == 'jon smith' }
       end
 
-      context "for multiple address" do
-        subject { ConstantContact::Contact.search(:email => ["jon@example.com", "my@example.com"]) }
-        it { subject.count.should == 2 }
+      context "with multiple addresses" do
+        subject { Contact.search(:email => ["jon@example.com", "my@example.com"]) }
+        it { should have(2).items }
         it { subject[0].Name == 'jon smith' }
       end
-
     end
 
     describe ".find" do
 
-      context "single contact by found by id" do
-        before { stub_get('/contacts/2', 'single_contact_by_id.xml') }
-        subject { ConstantContact::Contact.find(2) }
-        it { subject.Name = 'jon smith' }
-        it { subject.contact_lists == [1] }
+      context "single contact by id" do
+        before { stub_get('/contacts/2', 'contacts/2.xml') }
+        subject { Contact.find(2) }
+        it { should be_valid }
+        it { should be_a_kind_of Base }
+        its(:Name) { should == 'jon smith' }
+        its(:contact_lists) { should have(1).item }
+
+        context "with no contact lists" do
+          before { stub_get('/contacts/3', 'contacts/3.xml') }
+          subject { Contact.find(3) }
+          its(:Name) { should == 'jon smith' }
+          its(:contact_lists) { should have(1).item }
+        end
+
       end
 
-      context "single contact by found by id with no contact lists" do
-        before { stub_get('/contacts/3', 'single_contact_by_id_with_no_contactlists.xml') }
-        subject { ConstantContact::Contact.find(3) }
-        it { subject.Name = 'jon smith' }
-        it { subject.contact_lists == [] }
+      context "all active contacts" do
+        stub_get('/contacts?status=Active','contacts/active.xml')
+        subject { Contact.find(:all, :params => {:status => 'Active'}) }
+        it { should have(2).items }
+        specify { subject[0].id.should == "http://api.constantcontact.com/ws/customers/joesflowers/contacts/2" }
+      end
+
+      context "with multiple page results" do
+        before {
+          stub_get('/contacts', 'contacts.xml')
+          stub_get('/contacts?page=2', 'contacts2.xml')
+        }
+
+        context "with one email address" do
+          subject { Contact.all }
+          it { should have(4).items }
+          it { subject[0].Name.should == 'smith, jon' }
+          it { subject.last.Name.should == 'Doe, Marvin2'}
+        end
+
       end
 
     end
 
   end
+
+######################
+# Creating a Contact #
+######################
+
+# POST https://api.constantcontact.com/ws/customers/{username}/contacts
+
+########################
+# Listing All Contacts #
+########################
+
+# GET https://api.constantcontact.com/ws/customers/{username}/contacts
+
+#####################################
+# Obtaining a Contact's Information #
+#####################################
+
+# GET https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id}
+
+#######################
+# Opting-in a Contact #
+#######################
+
+# https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id}
+
+# <OptInSource> must be ACTION_BY_CONTACT, which can only be used when the API 
+# call is the direct result of an action performed by the contact (e.g. clicking 
+# a Subscribe button in an application). It is a serious violation of the Constant 
+# Contact Terms of Service to use the Opt-in features of the API in any other way 
+# (i.e. opting in a contact without his or her action and consent).
+
+
+########################
+# Opting-out a Contact #
+########################
+
+# DELETE https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id}
+
+##########################################
+# Removing a Contact from a Contact List #
+##########################################
+
+# PUT https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id}
+
+# simply remove all of the <ContactList> elements from the <ContactLists> element
+
+############################################
+# Searching for a Contact by Email Address #
+############################################
+
+# GET https://api.constantcontact.com/ws/customers/{username}/contacts?email={email-address}
+
+########################################################################
+# Searching for Contacts by Last Updated Date (Synchronizing Contacts) #
+########################################################################
+
+# GET https://api.constantcontact.com/ws/customers/{username}/contacts?updatedsince={date}&listid={numeric-list-id}
+
+######################################
+# Adding a Contact to a Contact List #
+######################################
+
+# PUT https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id} 
+
+# simply remove all of the <ContactList> elements from the <ContactLists> element
+
+################################
+# Updating Contact Information #
+################################
+
+# PUT https://api.constantcontact.com/ws/customers/{username}/contacts/{contact-id} 
+
+####################################
+# Contacts Collection and Resource #
+####################################
+
+# GET https://api.constantcontact.com/ws/customers/{user-name}/contacts
+
+# GET https://api.constantcontact.com/ws/customers/{user-name}/contacts/{contact-id}
+# PUT https://api.constantcontact.com/ws/customers/{user-name}/contacts/{contact-id}
 
 end

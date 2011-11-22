@@ -10,6 +10,7 @@
   <updated>2010-04-22T00:09:05.992Z</updated>
   <link href="/ws/customers/joesflowers/contacts" rel="first" />
   <link href="/ws/customers/joesflowers/contacts" rel="current" />
+  <link href="/ws/customers/joesflowers/contacts?page=2" rel="next" />
   <entry>
     <link href="/ws/customers/joesflowers/contacts/2" rel="edit" />
     <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/2</id>

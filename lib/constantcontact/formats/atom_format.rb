@@ -1,4 +1,4 @@
-#require 'atom/feed'
+#require 'atom'
 require 'rexml/document'
 
 module ActiveResource
@@ -18,76 +18,36 @@ module ActiveResource
         hash.to_xml(options)
       end
 
+      # returns {} or {:next_page=>"/page=2",:records=>[]}
       def decode(xml)
         xml.gsub!( /\<(\/?)atom\:/, '<\1' ) # the "events" feeds have "atom:" in front of tags, for some reason
         doc = REXML::Document.new(xml)
-        return [] if no_content?(doc)
-        result = Hash.from_xml(from_atom_data(doc))
-
-        if is_collection?(doc)
-          list = result['records']
-
-          next_link = REXML::XPath.first(doc, "/feed/link[@rel='next']")
-          if next_link
-            next_path = next_link.attribute('href').value
-            next_page = ::ConstantContact::Base.connection.get(next_path)
-            next_page = [next_page] if Hash === next_page
-            list.concat(next_page)
-          end
-
-          list
+        data = REXML::XPath.match(doc, '//content')
+        result = Hash.from_xml(from_content(data))
+        case data.size
+        when 0
+          return {}
+        when 1
+          result['records'].first
         else
-          [result.values.first]
+          # TODO - Not ideal, but the consumer needs to know this stuff!!
+          next_link = REXML::XPath.first(doc, "/feed/link[@rel='next']")
+          result[:next_page] = next_link.attribute('href').value if next_link
+          result
         end
       end
 
       private
-      
-      def from_atom_data(doc)
-        if is_collection?(doc)
-          content_from_collection(doc)
-        else
-          content_from_single_record(doc)
-        end
-      end
-      
-      def no_content?(doc)
-        REXML::XPath.match(doc,'//content').size == 0
-      end
-      
-      def is_collection?(doc)
-        REXML::XPath.match(doc,'//content').size > 1
-      end
 
-      def content_from_single_record(doc)
-        str = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        REXML::XPath.each(doc, '//content') do |e|
-          content = e.children[1]
-          str << content.to_s
-        end
-        str
-      end
-      
-      def content_from_collection(doc)
+      def from_content(data)
         str = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><records type=\"array\">"
-        REXML::XPath.each(doc, '//content') do |e|
+        data.each do |e|
           content = e.children[1]
           str << content.to_s
         end
         str << "</records>"
         str
       end
-      
-      def content_from_member(doc)
-        str = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        REXML::XPath.each(doc, '//content') do |e|
-         content = e.children[1].children
-         str << content.to_s
-        end
-        str
-      end
-
-
       
     end
   end

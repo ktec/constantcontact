@@ -23,7 +23,8 @@ module ConstantContact
     # Fix for ActiveResource 3.1+ errors
     self.format = :atom
 
-    self.site = "https://api.constantcontact.com/ws/customers"
+    self.site = "https://api.constantcontact.com/"
+    #self.timeout = 5
 
     class << self
 
@@ -60,11 +61,11 @@ module ConstantContact
           superclass.connection
         end
       end
-
+      
       def collection_path(prefix_options = {}, query_options = nil)
         check_prefix_options(prefix_options)
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{self.user}/#{collection_name}#{query_string(query_options)}"
+        "/ws/customers/#{self.user}#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
       end
 
       # Returns an integer which can be used in #find calls.
@@ -78,11 +79,12 @@ module ConstantContact
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
         integer_id = parse_id(id)
         id_val = integer_id.zero? ? nil : "/#{integer_id}"
-        "#{collection_path}#{id_val}#{query_string(query_options)}"
+        #"#{collection_path}#{id_val}#{query_string(query_options)}"
+        "/ws/customers/#{self.user}#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape id.to_s}#{query_string(query_options)}"
       end
 
       private
-=begin
+
       # Find every resource
       def find_every(options)
         begin
@@ -91,11 +93,11 @@ module ConstantContact
             instantiate_collection(get(from, options[:params]))
           when String
             path = "#{from}#{query_string(options[:params])}"
-            instantiate_collection(format.decode(connection.get(path, headers).body) || [])
+            instantiate_collection(decode(path) || [])
           else
             prefix_options, query_options = split_options(options[:params])
             path = collection_path(prefix_options, query_options)
-            instantiate_collection( (format.decode(connection.get(path, headers).body) || []), prefix_options )
+            instantiate_collection( (decode(path) || []), prefix_options )
           end
         rescue ActiveResource::ResourceNotFound
           # Swallowing ResourceNotFound exceptions and return nil - as per
@@ -104,25 +106,87 @@ module ConstantContact
         end
       end
 
+      # returns array
+      def decode(path)
+        records = []
+        next_path = path
+        loop do
+          if next_path
+            result = format.decode(connection.get(next_path, headers).body)
+            next_path = result[:next_page]
+            records << if result.has_key?("records")
+                          result["records"]
+                        else
+                          result
+                        end
+          else
+            break
+          end
+        end
+        # this might come back to bite
+        records.flatten.compact
+      end
+
+      # Find a single resource from the default URL
+      def find_single(scope, options)
+        prefix_options, query_options = split_options(options[:params])
+        path = element_path(scope, prefix_options, query_options)
+        instantiate_record(format.decode(connection.get(path, headers).body), prefix_options)
+      end
+
+      def instantiate_collection(collection, prefix_options = {})
+        collection.collect! { |record| 
+          instantiate_record(record, prefix_options) 
+        }
+      end
+
       def instantiate_record(record, prefix_options = {})
         new(record, true).tap do |resource|
           resource.prefix_options = prefix_options
         end
       end
-=end
+
+      # Dynamic finder for attributes Base.find_by_fruit(:name=>'apples')
+      def method_missing(method, *args, &block)
+        if method.to_s =~ /^find_(all_)?by_([_a-zA-Z]\w*)$/
+          raise ArgumentError, "Dynamic finder method must take an argument." if args.empty?
+          options = args.extract_options!
+          resources = send(:find, :all)
+          resources.send($1 == 'all_' ? 'select' : 'detect') { |container| container.send($2) == args.first }
+        else
+          super
+        end
+      end
 
     end
 
-    # Dynamic finder for attributes
-    def self.method_missing(method, *args, &block)
-      if method.to_s =~ /^find_(all_)?by_([_a-zA-Z]\w*)$/
-        raise ArgumentError, "Dynamic finder method must take an argument." if args.empty?
-        options = args.extract_options!
-        resources = send(:find, :all)
-        resources.send($1 == 'all_' ? 'select' : 'detect') { |container| container.send($2) == args.first }
+    # support underscore accessors to CamelCase the attributes hash
+    def method_missing(method_symbol, *arguments, &block) #:nodoc:
+      method_name = method_symbol.to_s
+      if method_name =~ /(=|\?)$/
+        case $1
+        when "="
+          attributes[search_attributes($`)] = arguments.first
+        when "?"
+          attributes[search_attributes($`)]
+        end
       else
+        key = search_attributes(method_name)
+        return attributes[key] if attributes.has_key?(key)
         super
       end
+    end
+
+    # check the attributes hash for method_name.camelcase and method_name.underscore
+    # and return the correct one, otherwise returns the same string
+    # TODO - this could actually result in the instance containing TWO variables
+    # the underscore takes preference
+    def search_attributes(method_name)
+      return method_name.underscore if attributes.has_key?(method_name.underscore)
+      # sorry for this next line, CC's consistency in naming conventions is shocking!
+      mnc = method_name.camelize.gsub(/(Urls?)/){|s| $1.upcase }
+      return mnc if attributes.has_key?(mnc)
+      return method_name
     end
 
   end

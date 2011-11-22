@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/53/events/summary</id>
+  <title type="text">Events Summary for Customer: joesflowers, Contact id: 53</title>
+  <link href="summary" />
+  <link href="summary" rel="self" />
+  <author>
+    <name>joesflowers</name>
+  </author>
+  <updated>2010-01-13T18:09:48.205Z</updated>
+  <entry>
+    <link href="/ws/customers/joesflowers/contacts/53/events/summary/1100552708599" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/events/summary/1100552708599</id>
+    <title type="text">Events Summary for Customer: joesflowers, Contact id: http://api.constantcontact.com/ws/customers/joesflowers/contacts/53</title>
+    <updated>2010-01-13T18:09:49.744Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ReportsSummary xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/events/summary/1100552708599">
+        <Contact id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/53">
+          <EmailAddress>customer1@example.com</EmailAddress>
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/contacts/53" rel="self" />
+        </Contact>
+        <Campaign id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100552708599">
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/campaigns/1100552708599" rel="self" />
+          <Name>Jan 08 2010</Name>
+        </Campaign>
+        <Opens>2</Opens>
+        <Clicks>1</Clicks>
+        <Forwards>0</Forwards>
+      </ReportsSummary>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/joesflowers/contacts/53/events/summary/1100552526522" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/events/summary/1100552526522</id>
+    <title type="text">Events Summary for Customer: joesflowers, Contact id: http://api.constantcontact.com/ws/customers/joesflowers/contacts/53</title>
+    <updated>2010-01-13T18:09:49.749Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ReportsSummary xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/events/summary/1100552526522">
+        <Contact id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/53">
+          <EmailAddress>customer1@example.com</EmailAddress>
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/contacts/53" rel="self" />
+        </Contact>
+        <Campaign id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100552526522">
+          <link xmlns="http://www.w3.org/2005/Atom" href="/ws/customers/joesflowers/campaigns/1100552526522" rel="self"/>
+          <Name>Jan 04 2010</Name>
+        </Campaign>
+        <Opens>1</Opens>
+        <Clicks>0</Clicks>
+        <Forwards>0</Forwards>
+      </ReportsSummary>
+    </content>
+  </entry>
+</feed>

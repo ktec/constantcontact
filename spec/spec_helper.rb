@@ -4,11 +4,13 @@ Bundler.setup
 
 require File.join(File.dirname(__FILE__), '/../lib/constantcontact')
 require 'constantcontact/searchable_behavior'
-require 'constantcontact/pageable_behavior'
+include ConstantContact
 
-ConstantContact::Base.api_key = ENV['CONSTANTCONTACT_KEY'] || 'api_key'
-ConstantContact::Base.user = ENV['CONSTANTCONTACT_USER'] || 'joesflowers'
-ConstantContact::Base.password = ENV['CONSTANTCONTACT_PASSWORD'] || 'password'
+def set_default_credentials
+  Base.api_key = ENV['CONSTANTCONTACT_KEY'] || 'api_key'
+  Base.user = ENV['CONSTANTCONTACT_USER'] || 'joesflowers'
+  Base.password = ENV['CONSTANTCONTACT_PASSWORD'] || 'password'
+end
 
 require 'fakeweb'
 FakeWeb.allow_net_connect = false
