@@ -13,6 +13,8 @@ All these classes are inherited from ActiveResouce::Base. Refer to the [ActiveRe
 
 ### Dependencies (see <code>constantcontact.gemspec</code> or run <code>bundle check</code>)
 
+ * Activeresource = 2.3.14
+
 ### Documentation
 
   I'm on [rdoc.info][rdoc]
