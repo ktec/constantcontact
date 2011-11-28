@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.add_dependency "activeresource", "~>3.0"
+  s.add_dependency "activeresource", "~>2.3.14"
+  s.add_dependency "builder", "~>3.0.0"
   s.add_development_dependency "rspec", "~>2.0.1"
   s.add_development_dependency "rake", "=0.8.7"
   s.add_development_dependency "ratom", ">=0.6.10"

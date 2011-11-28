@@ -14,7 +14,7 @@ module ConstantContact
     EDITABLE      = [:name,:from_name,:from_email,:reply_to_email,:view_as_webpage,:view_as_webpage_link_text,:view_as_webpage_text,:permission_reminder,:permission_reminder_text,:greeting_salutation,:greeting_name,:greeting_string,:organization_name,:organization_address1,:organization_address2,:organization_address3,:organization_city,:organization_state,:organization_international_state,:organization_postal_code,:organization_country,:include_forward_email,:forward_email_link_text,:include_subscribe_link,:subscribe_link_text,:email_content_format,:email_content,:email_text_content,:contact_lists]
     NON_EDITABLE  = [:date,:last_edit_date,:last_run_date,:next_run_date,:status,:sent,:opens,:clicks,:bounces,:forwards,:opt_outs,:share_page_url,:campaign_type,:archive_status,:archive_url,:urls]
 
-    schema do
+    #schema do
 
       # You need to ensure to specify the correct value in <EmailContentFormat>
       # element.  If it is set to HTML, then the values in <EmailContent> will
@@ -47,7 +47,7 @@ module ConstantContact
       # for "Forward Email to Friend" feature in the UI.  If <IncludeSubscribeLink>
       # is set to 'NO', then <SubscribeLinkText> will be ignored.
 
-    end
+    #end
 
     # Setup defaults when creating a new object since
     # CC requires so many extraneous fields to be present

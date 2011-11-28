@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://api.constantcontact.com/ws/customers/joesflowers/lists/1/members</id>
+  <title type="text">Contacts for Customer: joesflowers</title>
+  <link href="http://api.constantcontact.com/ws/customers/joesflowers/lists/1/members" />
+  <link href="http://api.constantcontact.com/ws/customers/joesflowers/lists/1/members" rel="self" />
+  <author>
+    <name>joesflowers</name>
+  </author>
+  <updated>2009-05-14T18:23:24.271Z</updated>
+  <link href="/ws/customers/joesflowers/lists/1/members" rel="first" />
+  <link href="/ws/customers/joesflowers/lists/1/members" rel="current" />
+  <entry>
+    <link href="/ws/customers/joesflowers/lists/1/members/26" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/26</id>
+    <title type="text">Contact: ssg@sg.cc</title>
+    <updated>2009-05-14T18:23:26.692Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactListMember xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/26">
+        <EmailAddress>ssg@sg.cc</EmailAddress>
+        <Name></Name>
+      </ContactListMember>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/joesflowers/lists/1/members/25" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/25</id>
+    <title type="text">Contact: sg23@sg.cc</title>
+    <updated>2009-05-14T18:23:26.693Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactListMember xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/25">
+        <EmailAddress>sg23@sg.cc</EmailAddress>
+        <Name>ss</Name>
+      </ContactListMember>
+    </content>
+  </entry>
+  <entry>
+    <link href="/ws/customers/joesflowers/lists/1/members/24" rel="edit" />
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/contacts/24</id>
+    <title type="text">Contact: sgddd@sg.cc</title>
+    <updated>2009-05-14T18:23:26.694Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <ContactListMember xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/24">
+        <EmailAddress>sgddd@sg.cc</EmailAddress>
+        <Name>MAss</Name>
+      </ContactListMember>
+    </content>
+  </entry>
+</feed>

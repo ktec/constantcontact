@@ -35,7 +35,7 @@ describe Activity do
             Activity.new( 
               :activity_type => "SV_ADD", 
               :data => "Email Address,First Name,Last Name\nwstest3@example.com, Fred, Test\nwstest4@example.com, Joan, Test\nwstest5@example.com, Ann, Test",
-              :lists => [ContactList.find(1),ContactList.find(2)] # TODO - shouldn't this accept << @list
+              :lists => [1,2]#[ContactList.find(1),ContactList.find(2)] # TODO - shouldn't this accept << @list
             )
           }
 
@@ -44,14 +44,14 @@ describe Activity do
 
         context "using Contact instances" do
           subject {
+            fred = Contact.new(:first_name => "Fred", :last_name => "Test", :email_address => "wstest3@example.com")
+            joan = Contact.new(:first_name => "Joan", :last_name => "Test", :email_address => "wstest4@example.com")
+            ann = Contact.new(:first_name => "Ann", :last_name => "Test", :email_address => "wstest5@example.com")
+
             Activity.new( 
               :activity_type => "SV_ADD", 
-              :contacts => [
-                Contact.new(:first_name => "Fred", :last_name => "Test", :email_address => "wstest3@example.com"),
-                Contact.new(:first_name => "Joan", :last_name => "Test", :email_address => "wstest4@example.com"),
-                Contact.new(:first_name => "Ann", :last_name => "Test", :email_address => "wstest5@example.com")
-              ],
-              :lists => [ContactList.find(1),ContactList.find(2)] # TODO - shouldn't this accept << @list
+              :contacts => [fred,joan,ann],
+              :lists => [1,2]#[ContactList.find(1),ContactList.find(2)] # TODO - shouldn't this accept << @list
             )
           }
 

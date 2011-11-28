@@ -20,19 +20,27 @@ module ActiveResource
 
       # returns {} or {:next_page=>"/page=2",:records=>[]}
       def decode(xml)
-        xml.gsub!( /\<(\/?)atom\:/, '<\1' ) # the "events" feeds have "atom:" in front of tags, for some reason
-        doc = REXML::Document.new(xml)
-        data = REXML::XPath.match(doc, '//content')
-        result = Hash.from_xml(from_content(data))
-        case data.size
+        if xml.is_a? Hash
+          result = xml
+          return result unless result.respond_to?('records')
+        end
+        unless result
+          xml.gsub!( /\<(\/?)atom\:/, '<\1' ) # the "events" feeds have "atom:" in front of tags, for some reason
+          doc = REXML::Document.new(xml)
+          data = REXML::XPath.match(doc, '//content')
+          result = Hash.from_xml(from_content(data))
+        end
+        case result['records'].count
         when 0
           return {}
         when 1
           result['records'].first
         else
-          # TODO - Not ideal, but the consumer needs to know this stuff!!
-          next_link = REXML::XPath.first(doc, "/feed/link[@rel='next']")
-          result[:next_page] = next_link.attribute('href').value if next_link
+          if doc
+            # TODO - Not ideal, but the consumer needs to know this stuff!!
+            next_link = REXML::XPath.first(doc, "/feed/link[@rel='next']")
+            result[:next_page] = next_link.attribute('href').value if next_link
+          end
           result
         end
       end

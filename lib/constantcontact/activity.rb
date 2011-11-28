@@ -3,10 +3,20 @@ module ConstantContact
   	self.format = ActiveResource::Formats::UrlEncodeFormat
 
     #attr_accessor :contacts, :lists, :activity_type, :raw_data # Data is a reserved word in Rails
-    schema do
-      attribute 'lists', :string
-      attribute 'contacts', :string
-      attribute 'data', :string
+    #attr_accessor :data, :contacts
+#    schema do
+#      attribute 'lists', :string
+#      attribute 'contacts', :string
+#      attribute 'data', :string
+#    end
+
+    attr_writer :data, :contacts
+
+    def data
+      @attributes[:data.to_s]
+    end
+    def contacts
+      @attributes[:contacts.to_s]
     end
 
     def encode
@@ -50,6 +60,9 @@ module ConstantContact
       result = ""
     	return result unless self.lists
       self.lists.each do |list|
+        if list.is_a?(Fixnum)
+          list = ContactList.find(list) 
+        end
         result += "&lists="
         result += CGI.escape(list.id)
       end

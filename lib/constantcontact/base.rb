@@ -53,7 +53,7 @@ module ConstantContact
           @connection.proxy = proxy if proxy
           @connection.user = "#{api_key}%#{user}" if user
           @connection.password = password if password
-          @connection.auth_type = auth_type if auth_type
+          #@connection.auth_type = auth_type if auth_type
           @connection.timeout = timeout if timeout
           @connection.ssl_options = ssl_options if ssl_options
           @connection
@@ -80,10 +80,23 @@ module ConstantContact
         integer_id = parse_id(id)
         id_val = integer_id.zero? ? nil : "/#{integer_id}"
         #"#{collection_path}#{id_val}#{query_string(query_options)}"
-        "/ws/customers/#{self.user}#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape id.to_s}#{query_string(query_options)}"
+        "/ws/customers/#{self.user}#{prefix(prefix_options)}#{collection_name}/#{URI.unescape id.to_s}#{query_string(query_options)}"
+      end
+      
+      # This is an alias for find(:all). You can pass in all the same
+      # arguments to this method as you can to <tt>find(:all)</tt>
+      def all(*args)
+        find(:all, *args)
       end
 
       private
+
+        def check_prefix_options(prefix_options)
+          p_options = HashWithIndifferentAccess.new(prefix_options)
+          prefix_parameters.each do |p|
+            raise(MissingPrefixParam, "#{p} prefix_option is missing") if p_options[p].blank?
+          end
+        end      
 
       # Find every resource
       def find_every(options)
@@ -112,7 +125,7 @@ module ConstantContact
         next_path = path
         loop do
           if next_path
-            result = format.decode(connection.get(next_path, headers).body)
+            result = format.decode(connection.get(next_path, headers))
             next_path = result[:next_page]
             records << if result.has_key?("records")
                           result["records"]
@@ -131,7 +144,7 @@ module ConstantContact
       def find_single(scope, options)
         prefix_options, query_options = split_options(options[:params])
         path = element_path(scope, prefix_options, query_options)
-        instantiate_record(format.decode(connection.get(path, headers).body), prefix_options)
+        instantiate_record(format.decode(connection.get(path, headers)), prefix_options)
       end
 
       def instantiate_collection(collection, prefix_options = {})
@@ -159,6 +172,67 @@ module ConstantContact
       end
 
     end
+
+    def initialize(attributes = {}, persisted = false)
+      @attributes = {}.with_indifferent_access
+      @prefix_options = {}
+      @persisted = persisted
+      load(attributes)
+    end
+
+    # A method to manually load attributes from a \hash. Recursively loads collections of
+    # resources. This method is called in +initialize+ and +create+ when a \hash of attributes
+    # is provided.
+    #
+    # ==== Examples
+    # my_attrs = {:name => 'J&J Textiles', :industry => 'Cloth and textiles'}
+    # my_attrs = {:name => 'Marty', :colors => ["red", "green", "blue"]}
+    #
+    # the_supplier = Supplier.find(:first)
+    # the_supplier.name # => 'J&M Textiles'
+    # the_supplier.load(my_attrs)
+    # the_supplier.name('J&J Textiles')
+    #
+    # # These two calls are the same as Supplier.new(my_attrs)
+    # my_supplier = Supplier.new
+    # my_supplier.load(my_attrs)
+    #
+    # # These three calls are the same as Supplier.create(my_attrs)
+    # your_supplier = Supplier.new
+    # your_supplier.load(my_attrs)
+    # your_supplier.save
+    def load(attributes, remove_root = false)
+      raise ArgumentError, "expected an attributes Hash, got #{attributes.inspect}" unless attributes.is_a?(Hash)
+      @prefix_options, attributes = split_options(attributes)
+
+      if attributes.keys.size == 1
+        remove_root = self.class.element_name == attributes.keys.first.to_s
+      end
+
+      attributes = Formats.remove_root(attributes) if remove_root
+
+      attributes.each do |key, value|
+        @attributes[key.to_s] =
+          case value
+            when Array
+              resource = nil
+              value.map do |attrs|
+                if attrs.is_a?(Hash)
+                  resource ||= find_or_create_resource_for_collection(key)
+                  resource.new(attrs)
+                else
+                  attrs.duplicable? ? attrs.dup : attrs
+                end
+              end
+            when Hash
+              resource = find_or_create_resource_for(key)
+              resource.new(value)
+            else
+              value.duplicable? ? value.dup : value
+          end
+      end
+      self
+    end    
 
     # support underscore accessors to CamelCase the attributes hash
     def method_missing(method_symbol, *arguments, &block) #:nodoc:

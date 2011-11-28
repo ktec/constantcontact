@@ -7,8 +7,8 @@ module ConstantContact
 
     def initialize(attributes = {}, persisted = false)
       attributes = attributes[0] if attributes.kind_of? Array
-      super
       @contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
+      super
     end
 
     #attr_accessor :opt_in_source
