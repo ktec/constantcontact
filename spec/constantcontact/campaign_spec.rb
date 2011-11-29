@@ -150,15 +150,27 @@ describe Campaign do
     end
 
     context "with parameters" do
-      subject { Campaign.new(:name => "Test Email",
-        :subject => "Test Email",
+      before do
+        stub_get('/lists/1', '/lists/1.xml')
+        stub_get('/lists/2', '/lists/2.xml')
+      end
+      subject { Campaign.new(:name => "Test Email With Parameters",
+        :subject => "Test Email With Parameters",
         :from_name => "Joe",
         :email_content_format => "HTML",
         :email_text_content => "Test Email",
         :email_content => "<h1>Test Email</h1>", 
-        :list_ids => [7,8]) }
+        :list_ids => [1,2]) }
       its(:from_name) { should == "Joe" }
-      its(:contact_lists) { should == [7,8] }
+      its(:contact_lists) { should == [ContactList.find(1),ContactList.find(2)] }
+
+      context ".save" do
+        before do
+          stub_post('/campaigns', 'nocontent.xml')
+          subject.save
+        end
+        it { should be_valid }
+      end
     end
 
     context "with attributes hash" do
