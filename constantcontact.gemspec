@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Ruby wrapper around ConstantContact API}
   s.description = <<-EOT
 Based on the original API module from DHH, http://developer.37signals.com/highrise/, this
-gem is a cleaned up, tested version of the same.
+gem is a cleaned up, tested version of the same for the Constant Contact API.
 
 Configure by adding the following:
 
