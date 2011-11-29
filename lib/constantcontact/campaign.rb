@@ -64,8 +64,14 @@ module ConstantContact
       xml = Builder::XmlMarkup.new
       xml.tag!("Campaign", :xmlns => "http://ws.constantcontact.com/ns/1.0/") do
         self.attributes.reject {|k,v| ['FromEmail','ReplyToEmail','ContactList'].include?(k)}.each{|k, v| xml.tag!( k.to_s.camelize, v )}
-        xml.tag!("ReplyToEmail") { xml.tag!('Email', :id => self.reply_to_email) }
-        xml.tag!("FromEmail") { xml.tag!('Email', :id => self.from_email) }
+        xml.tag!("ReplyToEmail") { 
+          xml.tag!('Email', :id => self.reply_to_email.id )
+          xml.tag!('EmailAddress', self.reply_to_email) 
+        }
+        xml.tag!("FromEmail") { 
+          xml.tag!('Email', :id => self.reply_to_email.id ) 
+          xml.tag!('EmailAddress', self.reply_to_email) 
+        }
         xml.tag!("ContactLists") do
           self.contact_lists.each do |list|
             xml.tag!("ContactList", :id=> list.url)
