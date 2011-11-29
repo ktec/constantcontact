@@ -6,7 +6,12 @@ describe Contact do
 
   describe do
 
-    before { set_default_credentials }
+    before do
+      set_default_credentials
+      stub_get('/lists/1', '/lists/1.xml')
+      stub_get('/lists/7', '/lists/1.xml')
+      stub_get('/lists/8', '/lists/2.xml')
+    end
 
     subject { Contact.new(:id => 1, :name => "First Contact") }
 
@@ -39,6 +44,13 @@ describe Contact do
         its(:name) { should == "First Contact" }
         its(:opt_in_source) { should == "ACTION_BY_CUSTOMER" }
         its(:contact_lists) { should have(2).items }
+        context ".save" do
+          before do
+            stub_post('/contacts', 'nocontent.xml')
+            subject.save
+          end
+          it { should be_valid }
+        end
       end
 
       context "with attributes hash" do

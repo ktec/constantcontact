@@ -54,7 +54,7 @@ module ConstantContact
     # when creating a new Campaign.
     def initialize(attributes = {}, persisted = false)
       attributes = attributes[0] if attributes.kind_of? Array
-      @contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
+      self.contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
       obj = super
       obj.set_defaults
       obj
@@ -64,19 +64,10 @@ module ConstantContact
       xml = Builder::XmlMarkup.new
       xml.tag!("Campaign", :xmlns => "http://ws.constantcontact.com/ns/1.0/") do
         self.attributes.reject {|k,v| ['FromEmail','ReplyToEmail','ContactList'].include?(k)}.each{|k, v| xml.tag!( k.to_s.camelize, v )}
-
-        # Overrides the default formatting above to CC's required format.
-        xml.tag!("ReplyToEmail") do
-          xml.tag!('Email', :id => self.reply_to_email)
-        end
-
-        xml.tag!("FromEmail") do
-          xml.tag!('Email', :id => self.from_email)
-        end
-
+        xml.tag!("ReplyToEmail") { xml.tag!('Email', :id => self.reply_to_email) }
+        xml.tag!("FromEmail") { xml.tag!('Email', :id => self.from_email) }
         xml.tag!("ContactLists") do
-          #@contact_lists = [1] if @contact_lists.nil? && self.new?
-          self.contact_lists.sort.each do |list|
+          self.contact_lists.each do |list|
             xml.tag!("ContactList", :id=> list.url)
           end
         end

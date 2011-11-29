@@ -7,7 +7,7 @@ module ConstantContact
 
     def initialize(attributes = {}, persisted = false)
       attributes = attributes[0] if attributes.kind_of? Array
-      @contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
+      self.contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
       super
     end
 
@@ -27,7 +27,6 @@ module ConstantContact
         self.attributes.reject {|k,v| k == 'ContactLists'}.each{|k, v| xml.tag!( k.to_s.camelize, v )}
         xml.tag!("OptInSource", self.opt_in_source)
         xml.tag!("ContactLists") do
-          #@contact_lists = [1] if @contact_lists.nil? && self.new?
           self.contact_lists.each do |list|
             xml.tag!("ContactList", :id=> list.url)
           end
