@@ -139,6 +139,14 @@ describe Campaign do
 
       it_should_behave_like "a default campaign"
 
+      context ".save" do
+        before do
+          stub_post('/campaigns', 'nocontent.xml')
+          subject.save
+        end
+        it { should be_valid }
+      end
+
     end
 
     context "with parameters" do

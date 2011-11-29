@@ -54,8 +54,8 @@ module ConstantContact
     # when creating a new Campaign.
     def initialize(attributes = {}, persisted = false)
       attributes = attributes[0] if attributes.kind_of? Array
-      obj = super
       @contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
+      obj = super
       obj.set_defaults
       obj
     end
