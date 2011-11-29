@@ -15,6 +15,7 @@ module ConstantContact
         </content>
       </entry>"
     end
+    alias :encode :to_atom
 
     protected
 
