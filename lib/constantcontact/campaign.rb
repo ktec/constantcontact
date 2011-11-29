@@ -126,8 +126,8 @@ module ConstantContact
         :id => "http://ws.constantcontact.com/ns/1.0/",
         :title => "",
         :author => "",
-        :updated => "2009-10-01T18:42:56.939Z",
-        :date => "2009-10-01T18:42:56.939Z",
+        :updated => "#{Time.now.strftime(DATE_FORMAT)}",
+        :date => "#{Time.now.strftime(DATE_FORMAT)}",
         # CC needs all these or it will choke
         :ViewAsWebpageLinkText => '',
         :ViewAsWebpageText => '',
