@@ -120,7 +120,36 @@ module ConstantContact
         :id => "http://ws.constantcontact.com/ns/1.0/",
         :title => "",
         :author => "",
-        :updated => "2009-10-01T18:42:56.939Z"
+        :updated => "2009-10-01T18:42:56.939Z",
+        :date => "2009-10-01T18:42:56.939Z",
+        # CC needs all these or it will choke
+        :ViewAsWebpageLinkText => '',
+        :ViewAsWebpageText => '',
+        :LetterImageList => '',
+        :LastEditDate => '',
+        :Sent => '0',
+        :Opens => '0',
+        :Clicks => '0',
+        :Bounces => '0',
+        :Forwards => '0',
+        :OptOuts => '0',
+        :SpamReports => '0',
+        :StyleSheet => '',
+        :OrganizationAddress1 => '',
+        :OrganizationAddress2 => '',
+        :OrganizationAddress3 => '',
+        :OrganizationCity => '',
+        :OrganizationState => '',
+        :OrganizationInternationalState => '',
+        :OrganizationPostalCode => '',
+        :OrganizationCountry => '',
+        :ForwardEmailLinkText => '',
+        :SubscribeLinkText => '',
+        :ArchiveStatus => '',
+        :ArchiveURL => '',
+        :SharePageURL => '',
+        :NextRunDate => '',
+        :Urls => ''
       }
       update_attributes(required, true)
 
