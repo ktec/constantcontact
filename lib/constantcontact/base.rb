@@ -85,15 +85,32 @@ module ConstantContact
 
       private
 
+      # returns array
+      def decode(path)
+        records = []
+        next_path = path
+        loop do
+          if next_path
+            result = format.decode(connection.get(next_path, headers).body)
+            next_path = result[:next_page]
+            records << ( result.has_key?("records") ? result["records"] : result )
+          else
+            break
+          end
+        end
+        # this might come back to bite
+        records.flatten.compact
+      end
+
       # Find every resource
       def find_every(options)
         begin
           case from = options[:from]
           when Symbol
-            instantiate_collection(get(from, options[:params]))
+            instantiate_collection( get(from, options[:params]) )
           when String
             path = "#{from}#{query_string(options[:params])}"
-            instantiate_collection(decode(path) || [])
+            instantiate_collection( decode(path) || [] )
           else
             prefix_options, query_options = split_options(options[:params])
             path = collection_path(prefix_options, query_options)
@@ -106,44 +123,11 @@ module ConstantContact
         end
       end
 
-      # returns array
-      def decode(path)
-        records = []
-        next_path = path
-        loop do
-          if next_path
-            result = format.decode(connection.get(next_path, headers).body)
-            next_path = result[:next_page]
-            records << if result.has_key?("records")
-                          result["records"]
-                        else
-                          result
-                        end
-          else
-            break
-          end
-        end
-        # this might come back to bite
-        records.flatten.compact
-      end
-
       # Find a single resource from the default URL
       def find_single(scope, options)
         prefix_options, query_options = split_options(options[:params])
         path = element_path(scope, prefix_options, query_options)
         instantiate_record(format.decode(connection.get(path, headers).body), prefix_options)
-      end
-
-      def instantiate_collection(collection, prefix_options = {})
-        collection.collect! { |record| 
-          instantiate_record(record, prefix_options) 
-        }
-      end
-
-      def instantiate_record(record, prefix_options = {})
-        new(record, true).tap do |resource|
-          resource.prefix_options = prefix_options
-        end
       end
 
       # Dynamic finder for attributes Base.find_by_fruit(:name=>'apples')
@@ -157,7 +141,6 @@ module ConstantContact
           super
         end
       end
-
     end
 
     # support underscore accessors to CamelCase the attributes hash
@@ -180,7 +163,9 @@ module ConstantContact
     # check the attributes hash for method_name.camelcase and method_name.underscore
     # and return the correct one, otherwise returns the same string
     # TODO - this could actually result in the instance containing TWO variables
-    # the underscore takes preference
+    # the underscore takes preference - SOLUTION - ALL CamelCase is resolved in the
+    # encode/decode stage (easier said than done), so the _ONLY_ time there is 
+    # CamelCase is in ATOM/XML and throughout the ruby library we only use underscore.
     def search_attributes(method_name)
       return method_name.underscore if attributes.has_key?(method_name.underscore)
       # sorry for this next line, CC's consistency in naming conventions is shocking!
