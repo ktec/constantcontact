@@ -1,7 +1,8 @@
 module ConstantContact
 	module ContactEvents
 		class Base < ConstantContact::Base
-			self.site += "/contacts/:contact_id/events"            
+			self.prefix = "/contacts/:contact_id/"            
+	    self.collection_name = "events"
 		end
 	end
 end

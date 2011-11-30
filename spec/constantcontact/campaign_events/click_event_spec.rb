@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CampaignEvents::SentEvent do
+describe CampaignEvents::ClickEvent do
   it { should be_a_kind_of CampaignEvents::Base }
   describe do
 	  subject { CampaignEvents::ClickEvent }
