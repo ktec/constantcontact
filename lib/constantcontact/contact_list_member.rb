@@ -1,5 +1,7 @@
 module ConstantContact
   class ContactListMember < Base
-		self.site += "/lists/:contact_list_id"
-	end
+  	self.prefix = "/lists/:contact_list_id/"
+    self.collection_name = "members"
+  	include Searchable
+  end
 end
