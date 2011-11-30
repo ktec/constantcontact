@@ -1,0 +1,32 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100544815515/events/sends</id>
+  <title type="text">Send Events for Customer: joesflowers, Campaign id: 1100544815515</title>
+  <link href="" />
+  <link href="" rel="self" />
+  <author>
+    <name>joesflowers</name>
+  </author>
+  <updated>2008-08-07T20:27:04.627Z</updated>
+  <link href="/ws/customers/joesflowers/campaigns/1100544815515/events/sends" rel="first" />
+  <link href="/ws/customers/joesflowers/campaigns/1100544815515/events/sends" rel="current" />
+  <entry>
+    <id>http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100544653344/events/sends/1122907...</id>
+    <title type="text">Email Send Event for Customer: joesflowers, Campaign: http://api.constantcontact.com/ws/customers/joesflowers/campaigns/110054...
+    <updated>2008-08-05T16:50:04.534Z</updated>
+    <author>
+      <name>Constant Contact</name>
+    </author>
+    <content type="application/vnd.ctct+xml">
+      <SentEvent xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100544815515/events/sends/1100544...">
+        <Contact id="http://api.constantcontact.com/ws/customers/joesflowers/contacts/1">
+          <EmailAddress>ianjones@example.net</EmailAddress>
+          <link xmlns="http://www.w3.org/2005/Atom" href="http://api.constantcontact.com/ws/customers/joesflowers/contacts/1" rel="self" />
+        </Contact>
+        <Campaign id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1122907878323">
+          <link xmlns="http://www.w3.org/2005/Atom" href="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100544815515" rel="self" />
+        </Campaign>
+        <EventTime>2008-08-05T16:50:04.534Z</EventTime>
+      </SentEvent>
+    </content>
+  </entry>
+</feed>

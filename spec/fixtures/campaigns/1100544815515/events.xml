@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title type="text">Constant Contact Web Services Event Workspace</atom:title>
+    <collection href="/ws/customers/joesflowers/campaigns/1100544815515/events/bounces">
+      <atom:title type="text">Bounce Events for Customer: joesflowers, Campaign id: : 1100544815515</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+    <collection href="/ws/customers/joesflowers/campaigns/1100544815515/events/forwards">
+      <atom:title type="text">Forward Events for Customer: joesflowers, Campaign id: : 1100544815515</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+    <collection href="/ws/customers/joesflowers/campaigns/1100544815515/events/opens">
+      <atom:title type="text">Open Events for Customer: joesflowers, Campaign id: : 1100544815515</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+    <collection href="/ws/customers/joesflowers/campaigns/1100544815515/events/optouts">
+      <atom:title type="text">Opt-out Events for Customer: joesflowers, Campaign id: : 1100544815515</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+    <collection href="/ws/customers/joesflowers/campaigns/1100544815515/events/sends">
+      <atom:title type="text">Send Events for Customer: joesflowers, Campaign id: : 1100544815515</atom:title>
+      <accept>application/atom+xml; type=entry</accept>
+    </collection>
+  </workspace>
+</service>
