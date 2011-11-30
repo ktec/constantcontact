@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <link href="/ws/customers/joesflowers/campaigns/1102414826616" rel="edit" />
+  <id>< http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1102414826616</id>
+  <title type="text">Copy of Jen R5 Deployment</title>
+  <updated>2009-01-18T14:00:04.681Z</updated>
+  <author>
+    <name>Constant Contact</name>
+  </author>
+  <content type="application/vnd.ctct+xml">
+    <Campaign xmlns="http://ws.constantcontact.com/ns/1.0/" id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1102414826616">
+      <Name>Copy of Jen R5 Deployment</Name>
+      <Status>Sent</Status>
+      <Date>2009-01-18T14:00:04.681Z</Date>
+      <LastEditDate>2009-01-17T13:53:12.932Z</LastEditDate>
+      <LastRunDate>2009-01-18T14:00:04.676Z</LastRunDate>
+      <Sent>1</Sent>
+      <Opens>1</Opens>
+      <Clicks>1</Clicks>
+      <Bounces>0</Bounces>
+      <Forwards>0</Forwards>
+      <OptOuts>0</OptOuts>
+      <SpamReports>0</SpamReports>
+      <Urls>
+        <Url id="http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1102414826616/events/urls/10113016...">
+          <value>< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">http://www.bestbuy.com</value>
+          <Clicks>1</Clicks>
+        </Url>
+      </Urls>
+      <ContactLists>
+        <ContactList id="http://api.constantcontact.com/ws/customers/joesflowers/lists/41">
+          <link xmlns="http://www.w3.org/2005/Atom" href="http://api.constantcontact.com/ws/customers/joesflowers/lists/41" rel="self" />
+        </ContactList>
+      </ContactLists>
+    </Campaign>
+  </content>
+  <source>
+    <id>< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">< a style="text-decoration: none;" onclick="return false" onmouseover="return false" rel="nofollow" target="_blank" onfocus="return false">http://api.constantcontact.com/ws/customers/joesflowers/campaigns</id>
+    <title type="text">Campaigns for customer: joesflowers</title>
+    <link href="http://api.constantcontact.com/ws/customers/joesflowers/campaigns" />
+    <link href="http://api.constantcontact.com/ws/customers/joesflowers/campaigns" rel="self" />
+    <author>
+      <name>joesflowers</name>
+    </author>
+    <updated>2009-01-19T13:47:03.700Z</updated>
+  </source>
+</entry>
