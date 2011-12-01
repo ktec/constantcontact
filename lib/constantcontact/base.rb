@@ -92,13 +92,20 @@ module ConstantContact
 
       private
 
+      def check_prefix_options(prefix_options)
+        p_options = HashWithIndifferentAccess.new(prefix_options)
+        prefix_parameters.each do |p|
+          raise(MissingPrefixParam, "#{p} prefix_option is missing") if p_options[p].blank?      
+        end
+      end
+
       # returns array
       def decode(path)
         records = []
         next_path = path
         loop do
           if next_path
-            result = format.decode(connection.get(next_path, headers).body)
+            result = format.decode(connection.get(next_path, headers))
             next_path = result[:next_page]
             records << ( result.has_key?("records") ? result["records"] : result )
           else
