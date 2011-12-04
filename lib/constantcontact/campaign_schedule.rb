@@ -46,7 +46,7 @@ module ConstantContact
         <id>#{self.schedule_url}</id>
         <title type=\"text\">#{tn}</title>
         <updated>#{tn}</updated>
-        <author><name>WHERE, Inc</name></author>
+        <author><name></name></author>
         <content type=\"application/vnd.ctct+xml\">
         #{self.to_xml}
         </content>
