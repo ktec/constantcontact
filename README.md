@@ -3,7 +3,7 @@
 ## What is it?
 This gem provides a set of classes to access information on [ConstantContact][h] via the published [API][api]:
 
-    Contact, List, Activity, Campaign.
+    Contact, List, Activity, Campaign, Schedule.
 
 All these classes are inherited from ActiveResouce::Base. Refer to the [ActiveResouce][ar] documentation for more information.
 
