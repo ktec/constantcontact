@@ -94,18 +94,14 @@ module ConstantContact
     def set_defaults
 
       defaults = {
-        :view_as_webpage => "NO",
         :from_name => self.class.user,
         :from_email => self.class.user,
-        :permission_reminder => 'YES',
-        :permission_reminder_text => 'You are receiving this email because of your relationship with us. Please <ConfirmOptin><a style="color:#0000ff;">confirm</a></ConfirmOptin> your continued interest in receiving email from us.',
         :greeting_salutation => 'Dear',
         :greeting_name => 'FirstName',
         :greeting_string => 'Greetings!',
         :status => 'DRAFT',
         :include_forward_email => 'NO',
-        :include_subscribe_link => 'NO',
-        :organization_name => self.class.user,
+        :organization_name => self.class.user
       }
       update_attributes(defaults)
 
@@ -122,16 +118,13 @@ module ConstantContact
       # new unique ID will be created anyway. The <updated> element must contain a
       # date or date/time value, but again the value is not used by the server.
       required = {
-        :campaign_type => "CUSTOM",
-        :id => "http://ws.constantcontact.com/ns/1.0/",
-        :title => "",
-        :author => "",
-        :updated => "#{Time.now.strftime(DATE_FORMAT)}",
-        :date => "#{Time.now.strftime(DATE_FORMAT)}",
-        # CC needs all these or it will choke
+        :CampaignType => "CUSTOM",
+        :Date => "#{Time.now.strftime(DATE_FORMAT)}",
         :ShowAgent => "false",
         :CampaignType => "CUSTOM",
         :PermissionReminder => "NO",
+        :PermissionReminderText => "",
+        :ViewAsWebpage => "NO",
         :ViewAsWebpageLinkText => "",
         :ViewAsWebpageText => "",
         :ProductID => "",
@@ -154,6 +147,7 @@ module ConstantContact
         :OrganizationPostalCode => "",
         :OrganizationCountry => "",
         :ForwardEmailLinkText => "",
+        :IncludeSubscribeLink => "NO",
         :SubscribeLinkText => "",
         :ArchiveStatus => "",
         :ArchiveURL => "",
