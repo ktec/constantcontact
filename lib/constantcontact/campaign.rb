@@ -129,33 +129,37 @@ module ConstantContact
         :updated => "#{Time.now.strftime(DATE_FORMAT)}",
         :date => "#{Time.now.strftime(DATE_FORMAT)}",
         # CC needs all these or it will choke
-        :ViewAsWebpageLinkText => '',
-        :ViewAsWebpageText => '',
-        :LetterImageList => '',
-        :LastEditDate => '',
-        :Sent => '0',
-        :Opens => '0',
-        :Clicks => '0',
-        :Bounces => '0',
-        :Forwards => '0',
-        :OptOuts => '0',
-        :SpamReports => '0',
-        :StyleSheet => '',
-        :OrganizationAddress1 => '',
-        :OrganizationAddress2 => '',
-        :OrganizationAddress3 => '',
-        :OrganizationCity => '',
-        :OrganizationState => '',
-        :OrganizationInternationalState => '',
-        :OrganizationPostalCode => '',
-        :OrganizationCountry => '',
-        :ForwardEmailLinkText => '',
-        :SubscribeLinkText => '',
-        :ArchiveStatus => '',
-        :ArchiveURL => '',
-        :SharePageURL => '',
-        :NextRunDate => '',
-        :Urls => ''
+        :ShowAgent => "false",
+        :CampaignType => "CUSTOM",
+        :PermissionReminder => "NO",
+        :ViewAsWebpageLinkText => "",
+        :ViewAsWebpageText => "",
+        :ProductID => "",
+        :LetterImageList => "",
+        :LastEditDate => "",
+        :Sent => "0",
+        :Opens => "0",
+        :Clicks => "0",
+        :Bounces => "0",
+        :Forwards => "0",
+        :OptOuts => "0",
+        :SpamReports => "0",
+        :StyleSheet => "",
+        :OrganizationAddress1 => "",
+        :OrganizationAddress2 => "",
+        :OrganizationAddress3 => "",
+        :OrganizationCity => "",
+        :OrganizationState => "",
+        :OrganizationInternationalState => "",
+        :OrganizationPostalCode => "",
+        :OrganizationCountry => "",
+        :ForwardEmailLinkText => "",
+        :SubscribeLinkText => "",
+        :ArchiveStatus => "",
+        :ArchiveURL => "",
+        :SharePageURL => "",
+        :NextRunDate => "",
+        :Urls => ""
       }
       update_attributes(required, true)
 
@@ -163,7 +167,7 @@ module ConstantContact
 
     def update_attributes(hash = {},overwrite=false)
       hash.each do |key,value|
-        attributes["#{key.to_s.camelize}"] = value unless overwrite or attributes.has_key? key.to_s.camelize
+        attributes["#{key.to_s.camelize}"] = value if overwrite or !attributes.has_key? key.to_s.camelize
       end
     end
 
