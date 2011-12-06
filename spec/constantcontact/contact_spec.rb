@@ -28,7 +28,7 @@ describe Contact do
       Contact.find_by_name("First Contact").should == subject
     end
 
-    context "when saved"
+    context "when saved" do
 
       context '.id' do
         pending "id returned should be an integer not the full uri that CC uses"

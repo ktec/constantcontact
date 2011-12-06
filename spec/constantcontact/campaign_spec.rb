@@ -44,7 +44,7 @@ describe Campaign do
       its(:to_xml) { should match /<Name>/ }
     end
 
-    context "when saved"
+    context "when saved" do
 
       context '.id' do
         pending "id returned should be an integer not the full uri that CC uses"
