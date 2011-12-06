@@ -105,7 +105,6 @@ module ConstantContact
         :date => "#{Time.now.strftime(DATE_FORMAT)}",
         :CampaignType => "CUSTOM",
         :ShowAgent => "false",
-        :CampaignType => "CUSTOM",
         :PermissionReminder => "NO",
         :ViewAsWebpage => "NO",
         :Sent => "0",
