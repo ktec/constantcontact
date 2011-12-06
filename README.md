@@ -61,7 +61,7 @@ This is inspired by and closely based on original work by Timothy Case, https://
 [ktec]: https://github.com/ktec
 [timcase]: https://github.com/timcase
 [rubyjedi]: https://github.com/rubyjedi
-[basenode]: https://github.com/basenode
+[bassnode]: https://github.com/bassnode
 
 [api]: http://developer.37signals.com/highrise
 [ar]: http://api.rubyonrails.org/classes/ActiveResource/Base.html
