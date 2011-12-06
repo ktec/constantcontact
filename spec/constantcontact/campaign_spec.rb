@@ -5,15 +5,22 @@ shared_examples_for "a default campaign" do
   its(:view_as_webpage) { should_not be_empty }
   its(:from_name) { should_not be_empty }
   its(:from_email) { should_not be_empty }
-  its(:permission_reminder) { should_not be_empty }
-  its(:permission_reminder_text) { should_not be_empty }
+  its(:permission_reminder) { should_not be_empty } # be_either ["NO","YES"] }
+  # need conditional tests
+  #its(:permission_reminder_text) { should_not be_empty } # only if above is Yes
   its(:greeting_salutation) { should_not be_empty }
   its(:greeting_name) { should_not be_empty }
   its(:greeting_string) { should_not be_empty }
   its(:status) { should_not be_empty }
-  its(:include_forward_email) { should_not be_empty }
-  its(:include_subscribe_link) { should_not be_empty }
+  its(:include_forward_email) { should_not be_empty } # be_either ["NO","YES"] }
+  its(:include_subscribe_link) { should_not be_empty } # be_either ["NO","YES"] }
   its(:organization_name) { should_not be_empty }
+  its(:date) { should_not be_empty }
+  its(:CampaignType) { should == "CUSTOM" }
+  its(:ShowAgent) { should_not be_empty } # be_either ["true","false"] }
+  its(:PermissionReminder) { should_not be_empty } # be_either ["NO","YES"] }
+  its(:ViewAsWebpage) { should_not be_empty } # be_either ["NO","YES"] }
+  its(:IncludeSubscribeLink) { should_not be_empty } # be_either ["NO","YES"] }
 end
 
 describe Campaign do
