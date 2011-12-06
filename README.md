@@ -69,4 +69,4 @@ This is inspired by and closely based on original work by Timothy Case, https://
 [cc]:  http://www.constantcontact.com/
 [i]:  https://github.com/ktec/constantcontact/issues
 [mit]:http://www.opensource.org/licenses/mit-license.php
-[rdoc]: http://rdoc.info/projects/tapajos/highrise
+[rdoc]: http://rdoc.info/projects/ktec/constantcontact
