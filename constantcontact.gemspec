@@ -9,10 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = ">= 1.3.6"
   s.add_dependency "activeresource", "~>3.0"
-  s.add_development_dependency "rspec", "~>2.7.0"
-  s.add_development_dependency "rake", "=0.8.7"
-  s.add_development_dependency "ratom", ">=0.6.10"
-  s.add_development_dependency "fakeweb", ">=1.3.0"
+  s.add_dependency "builder", "~>3.0.0"
 
   s.files = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- {test,spec,features,examples}/*`.split("\n")
