@@ -101,7 +101,8 @@ module ConstantContact
         :greeting_string => 'Greetings!',
         :status => 'DRAFT',
         :include_forward_email => 'NO',
-        :organization_name => self.class.user
+        :organization_name => self.class.user,
+        :date => "#{Time.now.strftime(DATE_FORMAT)}"
       }
       update_attributes(defaults)
 
@@ -119,7 +120,6 @@ module ConstantContact
       # date or date/time value, but again the value is not used by the server.
       required = {
         :CampaignType => "CUSTOM",
-        :Date => "#{Time.now.strftime(DATE_FORMAT)}",
         :ShowAgent => "false",
         :CampaignType => "CUSTOM",
         :PermissionReminder => "NO",
