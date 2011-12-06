@@ -94,18 +94,15 @@ module ConstantContact
     def set_defaults
 
       defaults = {
-        :view_as_webpage => "NO",
         :from_name => self.class.user,
         :from_email => self.class.user,
-        :permission_reminder => 'YES',
-        :permission_reminder_text => 'You are receiving this email because of your relationship with us. Please <ConfirmOptin><a style="color:#0000ff;">confirm</a></ConfirmOptin> your continued interest in receiving email from us.',
         :greeting_salutation => 'Dear',
         :greeting_name => 'FirstName',
         :greeting_string => 'Greetings!',
         :status => 'DRAFT',
         :include_forward_email => 'NO',
-        :include_subscribe_link => 'NO',
         :organization_name => self.class.user,
+        :date => "#{Time.now.strftime(DATE_FORMAT)}"
       }
       update_attributes(defaults)
 
@@ -122,40 +119,41 @@ module ConstantContact
       # new unique ID will be created anyway. The <updated> element must contain a
       # date or date/time value, but again the value is not used by the server.
       required = {
-        :campaign_type => "CUSTOM",
-        :id => "http://ws.constantcontact.com/ns/1.0/",
-        :title => "",
-        :author => "",
-        :updated => "2009-10-01T18:42:56.939Z",
-        :date => "2009-10-01T18:42:56.939Z",
-        # CC needs all these or it will choke
-        :ViewAsWebpageLinkText => '',
-        :ViewAsWebpageText => '',
-        :LetterImageList => '',
-        :LastEditDate => '',
-        :Sent => '0',
-        :Opens => '0',
-        :Clicks => '0',
-        :Bounces => '0',
-        :Forwards => '0',
-        :OptOuts => '0',
-        :SpamReports => '0',
-        :StyleSheet => '',
-        :OrganizationAddress1 => '',
-        :OrganizationAddress2 => '',
-        :OrganizationAddress3 => '',
-        :OrganizationCity => '',
-        :OrganizationState => '',
-        :OrganizationInternationalState => '',
-        :OrganizationPostalCode => '',
-        :OrganizationCountry => '',
-        :ForwardEmailLinkText => '',
-        :SubscribeLinkText => '',
-        :ArchiveStatus => '',
-        :ArchiveURL => '',
-        :SharePageURL => '',
-        :NextRunDate => '',
-        :Urls => ''
+        :CampaignType => "CUSTOM",
+        :ShowAgent => "false",
+        :CampaignType => "CUSTOM",
+        :PermissionReminder => "NO",
+        :PermissionReminderText => "",
+        :ViewAsWebpage => "NO",
+        :ViewAsWebpageLinkText => "",
+        :ViewAsWebpageText => "",
+        :ProductID => "",
+        :LetterImageList => "",
+        :LastEditDate => "",
+        :Sent => "0",
+        :Opens => "0",
+        :Clicks => "0",
+        :Bounces => "0",
+        :Forwards => "0",
+        :OptOuts => "0",
+        :SpamReports => "0",
+        :StyleSheet => "",
+        :OrganizationAddress1 => "",
+        :OrganizationAddress2 => "",
+        :OrganizationAddress3 => "",
+        :OrganizationCity => "",
+        :OrganizationState => "",
+        :OrganizationInternationalState => "",
+        :OrganizationPostalCode => "",
+        :OrganizationCountry => "",
+        :ForwardEmailLinkText => "",
+        :IncludeSubscribeLink => "NO",
+        :SubscribeLinkText => "",
+        :ArchiveStatus => "",
+        :ArchiveURL => "",
+        :SharePageURL => "",
+        :NextRunDate => "",
+        :Urls => ""
       }
       update_attributes(required, true)
 
@@ -163,7 +161,7 @@ module ConstantContact
 
     def update_attributes(hash = {},overwrite=false)
       hash.each do |key,value|
-        attributes["#{key.to_s.camelize}"] = value unless overwrite or attributes.has_key? key.to_s.camelize
+        attributes["#{key.to_s.camelize}"] = value if overwrite or !attributes.has_key? key.to_s.camelize
       end
     end
 
