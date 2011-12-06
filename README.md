@@ -1,4 +1,4 @@
-# ConstantContact (1.0.0) [![Build Status](https://secure.travis-ci.org/tapajos/constantcontact.png)](http://travis-ci.org/tapajos/constantcontact)
+# ConstantContact (1.0.0) [![Build Status](https://secure.travis-ci.org/ktec/constantcontact.png)](http://travis-ci.org/#!/ktec/constantcontact)
 
 ## What is it?
 This gem provides a set of classes to access information on [ConstantContact][h] via the published [API][api]:
