@@ -54,11 +54,7 @@ module ConstantContact
     # when creating a new Campaign.
     def initialize(attributes = {}, persisted = false)
       attributes = attributes[0] if attributes.kind_of? Array
-<<<<<<< HEAD
       self.contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
-=======
-      @contact_lists = attributes.delete(:list_ids) if attributes.has_key? :list_ids 
->>>>>>> 3dac2a3... updates to resolve bug saving a new campaign with contact list ids as an array
       obj = super
       obj.set_defaults
       obj
