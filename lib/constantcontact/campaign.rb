@@ -102,7 +102,20 @@ module ConstantContact
         :status => 'DRAFT',
         :include_forward_email => 'NO',
         :organization_name => self.class.user,
-        :date => "#{Time.now.strftime(DATE_FORMAT)}"
+        :date => "#{Time.now.strftime(DATE_FORMAT)}",
+        :CampaignType => "CUSTOM",
+        :ShowAgent => "false",
+        :CampaignType => "CUSTOM",
+        :PermissionReminder => "NO",
+        :ViewAsWebpage => "NO",
+        :Sent => "0",
+        :Opens => "0",
+        :Clicks => "0",
+        :Bounces => "0",
+        :Forwards => "0",
+        :OptOuts => "0",
+        :SpamReports => "0",
+        :IncludeSubscribeLink => "NO"
       }
       update_attributes(defaults)
 
@@ -119,24 +132,12 @@ module ConstantContact
       # new unique ID will be created anyway. The <updated> element must contain a
       # date or date/time value, but again the value is not used by the server.
       required = {
-        :CampaignType => "CUSTOM",
-        :ShowAgent => "false",
-        :CampaignType => "CUSTOM",
-        :PermissionReminder => "NO",
         :PermissionReminderText => "",
-        :ViewAsWebpage => "NO",
         :ViewAsWebpageLinkText => "",
         :ViewAsWebpageText => "",
         :ProductID => "",
         :LetterImageList => "",
         :LastEditDate => "",
-        :Sent => "0",
-        :Opens => "0",
-        :Clicks => "0",
-        :Bounces => "0",
-        :Forwards => "0",
-        :OptOuts => "0",
-        :SpamReports => "0",
         :StyleSheet => "",
         :OrganizationAddress1 => "",
         :OrganizationAddress2 => "",
@@ -147,7 +148,6 @@ module ConstantContact
         :OrganizationPostalCode => "",
         :OrganizationCountry => "",
         :ForwardEmailLinkText => "",
-        :IncludeSubscribeLink => "NO",
         :SubscribeLinkText => "",
         :ArchiveStatus => "",
         :ArchiveURL => "",
