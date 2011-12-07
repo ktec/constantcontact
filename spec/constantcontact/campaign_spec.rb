@@ -135,8 +135,7 @@ describe Campaign do
 
     context "ContactList" do
       subject { Campaign.find(1100545398420).contact_lists.first }
-      # TODO - refactor contact_lists method to return an array of ContactLists
-      #it { should be_a_kind_of ContactList }
+      it { should be_a_kind_of ContactList }
     end
   end
 
