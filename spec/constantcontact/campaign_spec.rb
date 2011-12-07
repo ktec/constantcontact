@@ -54,7 +54,10 @@ describe Campaign do
     context "when saved" do
 
       context '.id' do
-        pending "id returned should be an integer not the full uri that CC uses"
+        subject {
+          Campaign.new({"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/campaigns/2"})
+        }
+        its(:id) { should == 2 }
       end
 
     end
@@ -80,7 +83,7 @@ describe Campaign do
       subject { Campaign.all.first }
       it { should be_a_kind_of Campaign }
       its(:name) { should == "Nationwide 221111" }
-      its(:id) { should == "http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1108737216651" }
+      its(:id) { should == 1108737216651 }
       its(:status) { should == "Sent" }
       its(:date) { should == "2011-11-22T15:26:32.156Z" }
 
@@ -123,7 +126,7 @@ describe Campaign do
     subject { Campaign.find(1100545398420) }
     it { should be_a_kind_of Campaign }
     its(:name) { should == "joesflowers custom campaign HTML" }
-    its(:id) { should == "http://api.constantcontact.com/ws/customers/joesflowers/campaigns/1100545398420" }
+    its(:id) { should == 1100545398420 }
     its(:status) { should == "Draft" }
     its(:date) { should == "2009-10-01T18:42:56.939Z" }
     its(:contact_lists) { should have(1).item }

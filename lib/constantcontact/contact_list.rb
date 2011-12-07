@@ -12,14 +12,6 @@ module ConstantContact
       end
     end
 
-    def url
-      if id =~ /http/
-        "#{id}"
-      else
-        "#{::Base.site}#{::Base.user}/lists/#{id}"
-      end
-    end
-
     def self.find_by_name(name)
       lists = self.find :all
       lists.find{|list| list.Name == name}

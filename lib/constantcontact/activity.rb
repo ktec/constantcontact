@@ -35,7 +35,6 @@ module ConstantContact
 
     def self.element_path(id, prefix_options = {}, query_options = nil)
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-      id_val = Base.parse_id(id)
       id_val = id_val.blank? ? nil : "/#{id_val}"
       "#{collection_path}#{id_val}#{query_string(query_options)}"
     end
@@ -64,7 +63,7 @@ module ConstantContact
           list = ContactList.find(list) 
         end
         result += "&lists="
-        result += CGI.escape(list.id)
+        result += CGI.escape(list.url)
       end
       return result
     end
