@@ -31,7 +31,10 @@ describe Contact do
     context "when saved" do
 
       context '.id' do
-        pending "id returned should be an integer not the full uri that CC uses"
+        subject {
+          Contact.new({"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/contacts/2"})
+        }
+        its(:id) { should == 2 }
       end
 
     end
@@ -179,7 +182,7 @@ describe Contact do
         stub_get('/contacts?status=Active','contacts/active.xml')
         subject { Contact.find(:all, :params => {:status => 'Active'}) }
         it { should have(2).items }
-        specify { subject[0].id.should == "http://api.constantcontact.com/ws/customers/joesflowers/contacts/2" }
+        specify { subject[0].id.should == 2 }
       end
 
       context "with multiple page results" do

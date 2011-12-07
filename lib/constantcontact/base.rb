@@ -16,6 +16,14 @@ module ConstantContact
       </entry>"
     end
 
+    def id
+      Base.parse_id(attributes[:id])
+    end
+
+    def url
+      attributes[:id]
+    end
+
     protected
 
     DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
