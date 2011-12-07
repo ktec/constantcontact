@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Contact do
+
   it { should be_a_kind_of Base }
   it_should_behave_like "a searchable class"
 
@@ -185,10 +186,26 @@ describe Contact do
         its(:contact_lists) { should have(1).item }
 
         context "with no contact lists" do
-          before { stub_get('/contacts/3', 'contacts/3.xml') }
+          before { 
+            stub_get('/contacts/3', 'contacts/3.xml') 
+            stub_get('/lists/1', 'lists/1.xml') 
+          }
           subject { Contact.find(3) }
           its(:Name) { should == 'jon smith' }
           its(:contact_lists) { should have(1).item }
+        end
+
+        context "with two contact lists", :focus => true do
+          before { 
+            stub_get('/contacts/4', 'contacts/4.xml') 
+            stub_get('/lists/1', 'lists/1.xml') 
+            stub_get('/lists/2', 'lists/2.xml') 
+          }
+          subject { Contact.find(4) }
+          #its(:Name) { should == 'fred smith' }
+          its(:contact_lists) { 
+            should have(2).items 
+          }
         end
 
       end
