@@ -49,6 +49,7 @@ describe Campaign do
     context '.to_xml' do
       its(:to_xml) { should match /<Campaign xmlns=\"http:\/\/ws.constantcontact.com\/ns\/1.0\/\"/ }
       its(:to_xml) { should match /<Name>/ }
+      its(:to_xml) { should match /http:\/\/api.constantcontact.com\/ws\/customers\/joesflowers\/settings\/emailaddresses\/1/ }
     end
 
     context "when saved" do
