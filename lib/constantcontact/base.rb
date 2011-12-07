@@ -8,7 +8,7 @@ module ConstantContact
         <title type=\"text\"> </title>
         <updated>#{Time.now.strftime(DATE_FORMAT)}</updated>
         <author></author>
-        <id>#{id.blank? ? 'data:,none' : id}</id>
+        <id>#{url.blank? ? 'data:,none' : url}</id>
         <summary type=\"text\">#{self.class.name.split('::').last}</summary>
         <content type=\"application/vnd.ctct+xml\">
         #{self.to_xml}
@@ -22,7 +22,7 @@ module ConstantContact
     end
 
     def url
-      attributes[:id]
+      attributes[:id] unless attributes[:id].kind_of? Integer
     end
 
     protected

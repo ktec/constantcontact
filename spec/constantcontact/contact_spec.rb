@@ -28,13 +28,28 @@ describe Contact do
       Contact.find_by_name("First Contact").should == subject
     end
 
-    context "when saved" do
+    describe ".id" do
 
-      context '.id' do
+      context 'when given fully qualified id' do
+         # maybe better solution to remove id's from constructor
         subject {
           Contact.new({"id"=>"http://api.constantcontact.com/ws/customers/joesflowers/contacts/2"})
         }
         its(:id) { should == 2 }
+        its(:encode) { should match /<id>http:\/\/api.constantcontact.com\/ws\/customers\/joesflowers\/contacts\/2<\/id>/ }
+      end
+
+      context "when not given an id" do
+        subject { Contact.new(:name => "First Contact") }
+        its(:id) { should == 0 }
+        its(:encode) { should match /<id>data:,none<\/id>/ }
+      end
+
+      describe "when given an integer" do
+        # "shouldnt be able to define an object and give it an id"
+        subject { Contact.new(:id => 100) }
+        its(:id) { should == 100 }
+        its(:encode) { should match /<id>data:,none<\/id>/ }
       end
 
     end
