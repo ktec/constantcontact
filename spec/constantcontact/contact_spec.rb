@@ -133,9 +133,15 @@ describe Contact do
 
     describe ".search" do
       before {
+        stub_get('/contacts?email=fred%40example.com', 'nocontent.xml')
         stub_get('/contacts?email=jon%40example.com', 'contacts/search1.xml')
         stub_get('/contacts?email=jon%40example.com&email=my%40example.com', 'contacts/search2.xml')
       }
+
+      context "with no result" do
+        subject { Contact.search(:email => "fred@example.com") }
+        it { should have(0).item }
+      end
 
       context "with one email address" do
         subject { Contact.search(:email => "jon@example.com") }

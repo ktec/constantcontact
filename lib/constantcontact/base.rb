@@ -93,7 +93,7 @@ module ConstantContact
           if next_path
             result = format.decode(connection.get(next_path, headers).body)
             next_path = result[:next_page]
-            records << ( result.has_key?("records") ? result["records"] : result )
+            records << ( result.has_key?("records") ? result["records"] : result ) unless result.empty?
           else
             break
           end
