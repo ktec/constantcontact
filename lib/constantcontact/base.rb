@@ -17,7 +17,7 @@ module ConstantContact
     end
 
     def id
-      Base.parse_id(attributes[:id])
+      Base.parse_id(attributes[:id]) if attributes[:id]
     end
 
     def url
