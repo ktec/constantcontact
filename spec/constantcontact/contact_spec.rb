@@ -42,7 +42,7 @@ describe Contact do
 
       context "when not given an id" do
         subject { Contact.new(:name => "First Contact") }
-        its(:id) { should == 0 }
+        its(:id) { should == nil }
         its(:encode) { should match /<id>data:,none<\/id>/ }
       end
 

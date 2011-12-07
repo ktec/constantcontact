@@ -18,7 +18,7 @@ module ConstantContact
     alias :encode :to_atom
 
     def id
-      Base.parse_id(attributes[:id])
+      Base.parse_id(attributes[:id]) if attributes[:id]
     end
 
     def url
