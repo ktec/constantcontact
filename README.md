@@ -51,7 +51,7 @@ This is inspired by and closely based on original work by Timothy Case, https://
 
 * [Keith Salisbury][ktec]
 
-## Contributors
+## Credits
 
 * [Tim Case][timcase]
 * [Laurence A. Lee][rubyjedi]
